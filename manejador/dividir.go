@@ -61,7 +61,7 @@ func (m *Manejador) Dividir() {
 		metadataArtist := fmt.Sprintf(`artist="%v"`, escaparMetadata(m.InfoDisco.Grupo))
 		metadataAlbum := fmt.Sprintf(`album="%v"`, escaparMetadata(m.InfoDisco.Disco))
 		metadataAño := fmt.Sprintf(`year="%v"`, escaparMetadata(m.InfoDisco.Año))
-		metadataNumeroPista := fmt.Sprintf(`track="%v"`, escaparMetadata(fmt.Sprint(cancion.Track)))
+		metadataNumeroPista := fmt.Sprintf(`track="%v/%v"`, escaparMetadata(fmt.Sprint(cancion.Track)), len(m.InfoDisco.Canciones))
 
 		comando := exec.Command(m.RutaFfmpeg, "-i", m.RutaAudio, "-metadata", metadataTitulo, "-metadata", metadataArtist, "-metadata", metadataAlbum, "-metadata", metadataAño, "-metadata", metadataNumeroPista, "-acodec", "copy", "-ss", fmt.Sprint(cancion.Inicio), "-to", fmt.Sprint(final), rutaMp3)
 		errorComando := comando.Run()
